@@ -231,7 +231,7 @@ function SimulatorWidget(node) {
     // Poke a byte, don't touch any registers
     function storeByte(addr, value) {
       set(addr, value & 0xff);
-      if ((addr >= 0x200) && (addr <= 0x5ff)) {
+      if ((addr >= 0x200) && (addr <= 0x6ff)) {
         display.updatePixel(addr);
       }
     }
@@ -1902,7 +1902,9 @@ function SimulatorWidget(node) {
       }
 
       message("Code assembled successfully, " + codeLen + " bytes.");
-      return true;
+	  for(var i = 0; i < codeLen; i++) {
+		  display.updatePixel(0x600 + i);
+	  }
     }
 
     // Sanitize input: remove comments and trim leading/trailing whitespace
