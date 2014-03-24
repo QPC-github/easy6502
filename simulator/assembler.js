@@ -74,7 +74,7 @@ function SimulatorWidget(node) {
       debug: [false, false]
     };
     var assembled = {
-      assemble: false,
+      assemble: true,
       run: [true, 'Run'],
       reset: true,
       hexdump: true,
@@ -193,6 +193,9 @@ function SimulatorWidget(node) {
     function reset() {
       ctx.fillStyle = "black";
       ctx.fillRect(0, 0, width, height);
+      for(var i = 0; i < 0x200; i++) {
+          display.updatePixel(0x600 + i);
+      }
     }
 
     function updatePixel(addr) {
@@ -1870,9 +1873,9 @@ function SimulatorWidget(node) {
       }
 
       message("Code assembled successfully, " + codeLen + " bytes.");
-	  for(var i = 0; i < codeLen; i++) {
-		  display.updatePixel(0x600 + i);
-	  }
+      for(var i = 0; i < codeLen; i++) {
+        display.updatePixel(0x600 + i);
+      }
     }
 
     // assembleLine()
